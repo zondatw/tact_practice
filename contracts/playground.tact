@@ -16,6 +16,9 @@ contract Playground with Deployable {
     }
 
     receive(msg: Player) {
+        dumpStack();
+        dump(msg.id);
+        dump(msg.name);
         let output: StringBuilder = beginString()
             .concat("Player ID: ")
             .concat(msg.id.toString())
