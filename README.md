@@ -1,5 +1,7 @@
 # tact-playground
 
+ref: [Tact doc - debugging](https://docs.tact-lang.org/book/debug)  
+
 ## Project structure
 
 -   `contracts` - source code of all the smart contracts of the project and their dependencies.
