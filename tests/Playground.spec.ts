@@ -45,5 +45,5 @@ describe('Playground', () => {
         console.log("Address of our contract: " + playground.address);
         console.log(res); // ← here one would see results of emit() calls
         expect(res).toBe("sample");
-      });
+    });
 });
