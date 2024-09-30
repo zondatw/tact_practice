@@ -5,4 +5,8 @@ contract Playground with Deployable {
     // since v1.3.0, so the following may be omitted:
     //
     // init() {}
+
+    get fun get_sample(): String {
+        return "sample";
+    }
 }
