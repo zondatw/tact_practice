@@ -6,6 +6,10 @@ contract Playground with Deployable {
     //
     // init() {}
 
+    receive("player") {
+        emit("Time to play.".asComment());
+    }
+
     get fun get_sample(): String {
         return "sample";
     }

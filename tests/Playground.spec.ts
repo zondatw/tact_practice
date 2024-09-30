@@ -43,7 +43,27 @@ describe('Playground', () => {
         const res = await playground.getGetSample();
 
         console.log("Address of our contract: " + playground.address);
-        console.log(res); // ← here one would see results of emit() calls
+        console.log(res);
         expect(res).toBe("sample");
+    });
+
+    it('emits', async () => {
+        const res = await playground.send(
+            deployer.getSender(),
+            { value: toNano('0.05') },
+            'player',
+        );
+
+        console.log(res);
+        // We'll need only the body of the observed message:
+        const firstMsgBody = res.externals[0].body;
+        
+        // Now, let's parse it, knowing that it's a text message.
+        // NOTE: In a real-world scenario,
+        //       you'd want to check that first or wrap this in a try...catch
+        const firstMsgText = firstMsgBody.asSlice().loadStringTail();
+        
+        // "But to the Supes? Absolutely diabolical."
+        console.log(firstMsgText);
     });
 });
