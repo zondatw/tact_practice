@@ -68,8 +68,33 @@ describe('Playground', () => {
         
         // "But to the Supes? Absolutely diabolical."
         console.log(firstMsgText);
-        console.log('Expected:', firstMsgText, 'Length:', firstMsgText.length);
-        console.log('Expected:', firstMsgText, 'Length:', "\nTime to play.".length);
+        // console.log('Expected:', firstMsgText, 'Length:', firstMsgText.length);
+        // console.log('Expected:', firstMsgText, 'Length:', "\nTime to play.".length);
         expect(firstMsgText).toBe("Time to play.");
+    });
+
+    it('send player', async () => {
+        const res = await playground.send(
+            deployer.getSender(),
+            { value: toNano('0.05') },
+            {
+                $$type: "Player",
+                id: 1n,
+                name: "tester",
+            },
+        );
+
+        // console.log(res);
+        // We'll need only the body of the observed message:
+        const firstMsgBody = res.externals[0].body;
+        
+        // Now, let's parse it, knowing that it's a text message.
+        // NOTE: In a real-world scenario,
+        //       you'd want to check that first or wrap this in a try...catch
+        const firstMsgText = firstMsgBody.asSlice().loadStringTail().replace(/\u0000/g, '');
+        
+        // "But to the Supes? Absolutely diabolical."
+        console.log(firstMsgText);
+        expect(firstMsgText).toBe(`Player ID: 1 Name: tester`);
     });
 });
